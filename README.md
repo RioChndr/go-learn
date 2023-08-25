@@ -1,7 +1,7 @@
 ## Go lang Challenge
 
 - [x] Linked list
-- [ ] stack
+- [x] stack
 - [ ] queue
 - [ ] Tree
 - [ ] Binary search tree
