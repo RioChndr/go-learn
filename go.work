@@ -1,7 +1,8 @@
 go 1.21.0
 
 use (
-	"./LinkedList"
-	"./LinkedList/example"
-	"./Stack"
+	./LinkedList
+	./LinkedList/example
+	./Queue
+	./Stack
 )

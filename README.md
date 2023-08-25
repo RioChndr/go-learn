@@ -2,7 +2,7 @@
 
 - [x] Linked list
 - [x] stack
-- [ ] queue
+- [x] queue
 - [ ] Tree
 - [ ] Binary search tree
 - [ ] Trie

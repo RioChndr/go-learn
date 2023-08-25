@@ -9,7 +9,7 @@ import (
 )
 
 func main(){
-	var list = linkedList.LinkedList{}
+	var list = linkedList.List{}
 	
 	for i := 0; i < 100; i++ {
 		list.Add(&linkedList.Item{
@@ -36,8 +36,8 @@ func main(){
 	}
 
 	var headItem = list.Head
-	for headItem.Next != nil {
+	for headItem.Child != nil {
 		fmt.Printf(headItem.Data + "\n")
-		headItem = headItem.Next
+		headItem = headItem.Child
 	}
 }

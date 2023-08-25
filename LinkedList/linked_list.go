@@ -1,31 +1,31 @@
-package linkedList
+package LinkedList
 
 // Linked list
 
 type Item struct {
-	Next *Item
+	Child *Item
 	Id string
 	Data string
 }
 
-type LinkedList struct {
+type List struct {
 	Head *Item
-	Last *Item
+	Tail *Item
 	Size int
 }
 
-func (link *LinkedList) Add(newItem *Item){
-	if(link.Last == nil){
+func (link *List) Add(newItem *Item){
+	if(link.Tail == nil){
 		link.Head = newItem
-		link.Last = newItem
+		link.Tail = newItem
 	} else {
-		link.Last.Next = newItem
-		link.Last = newItem
+		link.Tail.Child = newItem
+		link.Tail = newItem
 	}
 	link.Size = link.Size + 1
 }
 
-func (link *LinkedList) Find(id string) (before *Item, current *Item){
+func (link *List) Find(id string) (before *Item, current *Item){
 	var indexBefore *Item
 	var indexCurr *Item = link.Head;
 	var selectedItem *Item
@@ -35,38 +35,55 @@ func (link *LinkedList) Find(id string) (before *Item, current *Item){
 			break
 		}
 		indexBefore = indexCurr
-		indexCurr = indexCurr.Next
+		indexCurr = indexCurr.Child
 	}
 	return indexBefore, selectedItem
 }
 
-func (link *LinkedList) AddAfter(id string, newItem *Item){
+func (link *List) AddAfter(id string, newItem *Item){
 	var _,selectedCurr = link.Find(id)
 	if selectedCurr == nil {
 		return;
 	}
-	if selectedCurr == link.Last{
-		link.Last = newItem
+	if selectedCurr == link.Tail{
+		link.Tail = newItem
 	} else {
-		newItem.Next = selectedCurr.Next
+		newItem.Child = selectedCurr.Child
 	}
-	selectedCurr.Next = newItem
+	selectedCurr.Child = newItem
 	link.Size = link.Size + 1
 }
 
-func (link *LinkedList) Remove(id string){
+func (link *List) Remove(id string){
 	var selectedBefore,selectedCurr = link.Find(id)
 	if selectedCurr == nil {
 		return;
 	}
 	link.Size = link.Size - 1
 	if selectedCurr == link.Head {
-		link.Head = selectedCurr.Next
+		link.Head = selectedCurr.Child
 		return
 	}
-	if selectedCurr == link.Last {
-		selectedBefore.Next = nil
+	if selectedCurr == link.Tail {
+		selectedBefore.Child = nil
+		link.Tail = selectedBefore
 		return
 	}
-	selectedBefore.Next = selectedCurr.Next
+	selectedBefore.Child = selectedCurr.Child
+}
+
+func (l *List) Push(i *Item){
+	if l.Head != nil{
+		i.Child = l.Head
+	}
+	
+	l.Head = i
+	l.Size = l.Size + 1
+}
+
+func (l *List) Pop() (*Item){
+	old := l.Head
+	l.Head = l.Head.Child	
+	l.Size = l.Size - 1
+	return old;
 }
